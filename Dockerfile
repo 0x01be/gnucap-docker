@@ -1,16 +1,11 @@
+FROM 0x01be/gnucap:build as build
+
 FROM 0x01be/base
 
-WORKDIR /gnucap
+COPY --from=build /opt/gnucap/ /opt/gnucap/
 
-ENV REVISION=develop
-RUN apk add --no-cache --virtual gnucap-build-dependencies \
-    git \
-    build-base \
-    readline-dev
+RUN apk add --no-cache --virtual gnucap-runtime-dependencies \
+    libstdc++
 
-RUN git clone --depth 1 --branch ${REVISION} git://git.savannah.gnu.org/gnucap.git /gnucap
-
-RUN ./configure --prefix=/opt/gnucap
-RUN make
-RUN make install
-
+ENV LD_LIBRARY_PATH=/lib:/usr/lib:/opt/gnucap/lib/ \
+    PATH=${PATH}:/opt/bin/gnucap
