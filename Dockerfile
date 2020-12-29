@@ -5,7 +5,6 @@ FROM 0x01be/base
 WORKDIR /workspace
 
 COPY --from=build /opt/gnucap/ /opt/gnucap/
-COPY --from=build /gnucap-python/examples/ /opt/gnucap/examples/
 
 RUN apk add --no-cache --virtual gnucap-runtime-dependencies \
     python3 \
