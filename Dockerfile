@@ -1,4 +1,4 @@
-FROM 0x01be/gnucap:build-python as build
+FROM 0x01be/gnucap:build-full as build
 
 FROM 0x01be/base
 
