@@ -25,6 +25,7 @@ ENV PATH=${PATH}:/opt/swig/bin \
     LD_LIBRARY_PATH=/lib:/usr/lib:/opt/gnucap/lib \
     SWIG=/opt/swig/bin/swig
 RUN ./bootstrap &&\
-    ./configure --prefix=/opt/gnucap &&\
-    until [ $(make install) ]; do echo "Retrying..."; done
+    ./configure --prefix=/opt/gnucap
+RUN i=0; while [ $i -le 33 ]; do make install || true; i=$((i+1)); done
+#    until [ $(make install 2>&1 | grep '???') ]; do printf "."; done
 
