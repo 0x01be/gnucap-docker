@@ -9,6 +9,7 @@ COPY --from=build /gnucap-python/examples/ /opt/gnucap/examples/
 
 RUN apk add --no-cache --virtual gnucap-runtime-dependencies \
     python3 \
+    py3-numpy \
     libstdc++ &&\
     adduser -D -u 1000 gnucap &&\
     chown gnucap:gnucap /workspace
