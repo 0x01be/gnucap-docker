@@ -2,6 +2,8 @@ FROM 0x01be/gnucap:build-python as build
 
 FROM 0x01be/base
 
+WORKDIR /workspace
+
 COPY --from=build /opt/gnucap/ /opt/gnucap/
 
 RUN apk add --no-cache --virtual gnucap-runtime-dependencies \
