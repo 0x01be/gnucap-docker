@@ -29,3 +29,5 @@ RUN ./bootstrap &&\
 RUN i=0; while [ $i -le 33 ]; do make install || true; i=$((i+1)); done
 #    until [ $(make install 2>&1 | grep '???') ]; do printf "."; done
 
+RUN cp -R /gnucap-python/examples/ /opt/gnucap/share/examples/
+
