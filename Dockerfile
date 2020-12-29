@@ -7,9 +7,12 @@ WORKDIR /workspace
 COPY --from=build /opt/gnucap/ /opt/gnucap/
 
 RUN apk add --no-cache --virtual gnucap-runtime-dependencies \
-    libstdc++ \
-    python3
+    python3 \
+    libstdc++ &&\
+    adduser -D -u 1000 gnucap &&\
+    chown gnucap:gnucap /workspace
 
+USER gnucap
 ENV LD_LIBRARY_PATH=/lib:/usr/lib:/opt/gnucap/lib \
     PATH=${PATH}:/opt/gnucap/bin \
     PYTHONPATH=/usr/lib/python3.8/site-packages:/opt/gnucap/lib/python3.8/site-packages
